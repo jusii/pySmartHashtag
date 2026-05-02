@@ -31,6 +31,10 @@ dependencies = [
 Homepage = "https://github.com/DasBasti/pySmartHashtag"
 Issues = "https://github.com/DasBasti/pySmartHashtag/issues"
 
+[tool.setuptools.packages.find]
+include = ["pysmarthashtag*"]
+exclude = ["captures*", "tests*", "*.egg-info"]
+
 [tool.setuptools_scm]
 
 [tool.black]
