@@ -1,5 +1,7 @@
 """Fixtures for Smart tests."""
 
+import re
+
 import respx
 
 from pysmarthashtag.const import (
@@ -104,6 +106,22 @@ class SmartMockRouter(respx.MockRouter):
             self.get(base_url + "/remote-control/vehicle/status/soc/TestVIN0000000002?setting=charging").respond(
                 200,
                 json=load_response(RESPONSE_DIR / "soc_90.json"),
+            )
+            # Per-trip GPS-trackpoints endpoint takes
+            # endTime/startTime/pageIndex/pageSize/source query params.
+            # Match by regex prefix so the route fires regardless of
+            # param values.
+            self.get(re.compile(re.escape(
+                base_url + "/vehicle-history-service/journal-service/vehicle/status/history/TestVIN0000000001"
+            ) + r".*")).respond(
+                200,
+                json=load_response(RESPONSE_DIR / "trackpoints_response.json"),
+            )
+            self.get(re.compile(re.escape(
+                base_url + "/vehicle-history-service/journal-service/vehicle/status/history/TestVIN0000000002"
+            ) + r".*")).respond(
+                200,
+                json=load_response(RESPONSE_DIR / "trackpoints_response.json"),
             )
 
         self.get(OTA_SERVER_URL + "app/info/TestVIN0000000001").respond(
