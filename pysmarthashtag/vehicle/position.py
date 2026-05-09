@@ -19,10 +19,10 @@ class Position(VehicleDataBase):
     """Altitude of the vehicle."""
 
     latitude: Optional[int] = None
-    """Latitude of the vehicle."""
+    """Latitude of the vehicle (raw, in milliarc-seconds — divide by 3,600,000 for WGS84 decimal degrees)."""
 
     longitude: Optional[int] = None
-    """Longitude of the vehicle."""
+    """Longitude of the vehicle (raw, in milliarc-seconds — divide by 3,600,000 for WGS84 decimal degrees)."""
 
     position_can_be_trusted: Optional[bool] = None
     """Position can be trusted."""

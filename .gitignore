@@ -74,3 +74,7 @@ venv.bak/
 
 # Generated response files
 response-*.json
+
+# Research/probe artefacts (not part of the library)
+capture_journal.py
+captures/
